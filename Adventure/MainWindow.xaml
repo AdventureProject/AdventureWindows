@@ -1,0 +1,28 @@
+﻿<Window x:Class="Adventure.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Adventure"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="230.062" Width="393.642">
+    <Grid Margin="0,0,12,11">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="19*"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Fill="#FFA6A6A6" HorizontalAlignment="Left" Height="58" Margin="5,5,0,0" Stroke="Black" VerticalAlignment="Top" Width="90"/>
+        
+        <Button x:Name="button" Click="TodaysWallpaper_Click" Content="Today" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Image x:Name="imagePreview" HorizontalAlignment="Left" Height="178" Margin="100,10,0,0" VerticalAlignment="Top" Width="274" Grid.RowSpan="2"/>
+        <Button x:Name="exitButton" Click="Exit_Click" Content="Exit" HorizontalAlignment="Left" Margin="10,12.783,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
+        <Button x:Name="scheduleButton" Click="Schedule_Click" Content="Schedule" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="75"/>
+
+        <Rectangle Fill="#FFA6A6A6" HorizontalAlignment="Left" Height="58" Margin="5,93,0,0" Stroke="Black" VerticalAlignment="Top" Width="90" Grid.RowSpan="2"/>
+        <Button x:Name="startOnBootbutton" Click="StartBoot_Click" Content="Start on Boot" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="removeOnBootbutton" Click="RemoveBoot_Click" Content="Cancel Boot" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="randomButton" Click="RandomWallpaper_Click" Content="Random" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
