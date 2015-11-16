@@ -6,6 +6,7 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Adventure
 {
@@ -65,6 +66,24 @@ namespace Adventure
         public static Photo GetRandomPhoto()
         {
             return GetPhoto(URL_RANDOM_WALLPAPER);
+        }
+
+        public static string version = @"0";
+        public static async Task<Octokit.Release> getLatestVersion()
+        {
+            var github = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("AdventureWindows"));
+            var releases = await github.Release.GetAll("Wavesonics", "AdventureWindows");
+            return releases[0];
+        }
+
+        public static async void checkVersion()
+        {
+            var latest = await getLatestVersion();
+
+            if (!latest.Name.Equals(version, StringComparison.Ordinal))
+            {
+                MessageBox.Show("New version avalible:\nLatest: " + latest.Name + "\nCurrent: " + version);
+            }
         }
     }
 }

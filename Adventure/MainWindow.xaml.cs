@@ -1,11 +1,11 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace Adventure
 {
@@ -17,6 +17,8 @@ namespace Adventure
         public MainWindow()
         {
             InitializeComponent();
+
+            AdventureUtils.checkVersion();
 
             Photo currentWallpaper = app().currentWallpaper;
             if(currentWallpaper == null)
@@ -44,7 +46,7 @@ namespace Adventure
                     setImagePreviewAsync(photo);
                 });
 
-            bw.RunWorkerAsync(AdventureUtils.URL_TODAYS_WALLPAPER);
+            bw.RunWorkerAsync();
         }
 
         public void setImagePreviewAsync(Photo photo)
@@ -53,7 +55,6 @@ namespace Adventure
             bw.DoWork += new DoWorkEventHandler(
                 delegate (object o, DoWorkEventArgs args)
                 {
-                    //Photo photo = AdventureUtils.GetPhoto(url);
                     if (photo != null)
                     {
                         Uri uri = new Uri(photo.Image);
@@ -111,6 +112,11 @@ namespace Adventure
         public void Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        public void LatestVersion_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(((Hyperlink)sender).NavigateUri.ToString());
         }
 
         private App app()

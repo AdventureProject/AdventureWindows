@@ -13,9 +13,9 @@
         </Grid.RowDefinitions>
 
         <Rectangle Fill="#FFA6A6A6" HorizontalAlignment="Left" Height="58" Margin="5,5,0,0" Stroke="Black" VerticalAlignment="Top" Width="90"/>
-        
+
         <Button x:Name="button" Click="TodaysWallpaper_Click" Content="Today" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
-        <Image x:Name="imagePreview" HorizontalAlignment="Left" Height="178" Margin="100,10,0,0" VerticalAlignment="Top" Width="274" Grid.RowSpan="2"/>
+        <Image x:Name="imagePreview" HorizontalAlignment="Left" Height="165" Margin="100,10,0,0" VerticalAlignment="Top" Width="274" Grid.RowSpan="2"/>
         <Button x:Name="exitButton" Click="Exit_Click" Content="Exit" HorizontalAlignment="Left" Margin="10,12.783,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
         <Button x:Name="scheduleButton" Click="Schedule_Click" Content="Schedule" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="75"/>
 
@@ -24,5 +24,9 @@
         <Button x:Name="removeOnBootbutton" Click="RemoveBoot_Click" Content="Cancel Boot" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="randomButton" Click="RandomWallpaper_Click" Content="Random" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75"/>
 
+        <TextBlock Margin="0,25,10,-4" Grid.Row="1" HorizontalAlignment="Right" Width="104">
+            Get 
+            <Hyperlink NavigateUri="http://wethinkadventure.rocks/client/windows/latest" Click="LatestVersion_Click">Latest Version</Hyperlink>
+        </TextBlock>
     </Grid>
 </Window>
