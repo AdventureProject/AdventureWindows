@@ -41,6 +41,8 @@ namespace Adventure
 
             StartOnBoot();
             SetUpTimer();
+
+            FetchTodaysWallpaper();
         }
 
         private void OpenCommandExecuted(object target, ExecutedRoutedEventArgs e)
@@ -124,7 +126,7 @@ namespace Adventure
 
         public void SetUpTimer()
         {
-            SetUpTimer(new TimeSpan(0, 0, 00));
+            SetUpTimer(new TimeSpan(1, 0, 00));
         }
 
         public void SetUpTimer(TimeSpan alertTime)
@@ -139,8 +141,10 @@ namespace Adventure
             TimeSpan timeToGo = alertTime - current.TimeOfDay;
             if (timeToGo < TimeSpan.Zero)
             {
-                return; //time already passed
+                TimeSpan timeLeftToday = TimeSpan.FromDays(1.0) - current.TimeOfDay;
+                timeToGo = timeLeftToday + alertTime;
             }
+            
             this.timer = new Timer(x =>
             {
                 FetchTodaysWallpaper();

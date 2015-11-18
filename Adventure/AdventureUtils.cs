@@ -68,7 +68,7 @@ namespace Adventure
             return GetPhoto(URL_RANDOM_WALLPAPER);
         }
 
-        public static string version = @"0";
+        public static string VERSION = @"1";
         public static async Task<Octokit.Release> getLatestVersion()
         {
             var github = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("AdventureWindows"));
@@ -80,9 +80,9 @@ namespace Adventure
         {
             var latest = await getLatestVersion();
 
-            if (!latest.Name.Equals(version, StringComparison.Ordinal))
+            if (!latest.Name.Equals(VERSION, StringComparison.Ordinal))
             {
-                MessageBox.Show("New version avalible:\nLatest: " + latest.Name + "\nCurrent: " + version);
+                MessageBox.Show("New version avalible:\nLatest: " + latest.Name + "\nCurrent: " + VERSION);
             }
         }
     }
