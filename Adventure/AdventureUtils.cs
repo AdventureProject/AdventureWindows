@@ -72,7 +72,7 @@ namespace Adventure
         public static async Task<Octokit.Release> getLatestVersion()
         {
             var github = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("AdventureWindows"));
-            var releases = await github.Release.GetAll("Wavesonics", "AdventureWindows");
+            var releases = await github.Repository.Release.GetAll("Wavesonics", "AdventureWindows");
             return releases[0];
         }
 

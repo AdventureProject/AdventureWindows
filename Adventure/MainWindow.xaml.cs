@@ -29,7 +29,7 @@ namespace Adventure
             {
                 setImagePreviewAsync(currentWallpaper);
             }
-
+            
             versionTextBlock.Text = "V " + AdventureUtils.VERSION;
         }
 
@@ -75,6 +75,7 @@ namespace Adventure
 
                         bitmapSource.Freeze();
                         imagePreview.Dispatcher.BeginInvoke(new Action(() => {
+                            photoTitle.Content = photo.Title;
                             imagePreview.Source = bitmapSource;
                         }));
                     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Adventure"
         mc:Ignorable="d"
-        Title="MainWindow" Height="230.062" Width="393.642">
+        Title="Adventure.Rocks" Height="300" Width="500" Icon="Icons/Tray.ico">
     <Grid Margin="0,0,12,11">
         <Grid.RowDefinitions>
             <RowDefinition Height="75*"/>
@@ -15,7 +15,7 @@
         <Rectangle Fill="#FFA6A6A6" HorizontalAlignment="Left" Height="58" Margin="5,5,0,0" Stroke="Black" VerticalAlignment="Top" Width="90"/>
 
         <Button x:Name="button" Click="TodaysWallpaper_Click" Content="Today" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
-        <Image x:Name="imagePreview" HorizontalAlignment="Left" Height="165" Margin="100,10,0,0" VerticalAlignment="Top" Width="274" Grid.RowSpan="2"/>
+        <Image x:Name="imagePreview" HorizontalAlignment="Left" Height="165" Margin="115,42,0,0" VerticalAlignment="Top" Width="274"/>
         <Button x:Name="exitButton" Click="Exit_Click" Content="Exit" HorizontalAlignment="Left" Margin="10,12.783,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
         <Button x:Name="scheduleButton" Click="Schedule_Click" Content="Schedule" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="75"/>
 
@@ -29,5 +29,6 @@
             <Hyperlink NavigateUri="http://wethinkadventure.rocks/client/windows/latest" Click="LatestVersion_Click">Latest Version</Hyperlink>
         </TextBlock>
         <TextBlock x:Name="versionTextBlock" HorizontalAlignment="Left" Margin="115,25,0,-3" Grid.Row="1" TextWrapping="Wrap" Text="V ?" VerticalAlignment="Top" RenderTransformOrigin="6.125,0.312"/>
+        <Label x:Name="photoTitle" Content="Title" HorizontalAlignment="Left" Margin="115,11,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.005,0.012" Width="352"/>
     </Grid>
 </Window>
