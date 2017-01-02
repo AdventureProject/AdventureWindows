@@ -34,7 +34,7 @@
             </Label.Effect>
         </Label>
         <Label x:Name="descriptionLabel" Content="Label" HorizontalAlignment="Left" Margin="11,0,0,10" RenderTransformOrigin="0.256,0.006" Width="431" Foreground="White" Background="#33F4F4F5" Height="104" VerticalAlignment="Bottom"/>
-        <Label x:Name="photoDateLabel" Content="Title" RenderTransformOrigin="0.005,0.012" ToolTip="Photo Title" Foreground="White" Margin="0,10,9.8,0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="87" Height="32" VerticalAlignment="Top" FontStyle="Italic">
+        <Label x:Name="photoDateLabel" Content="Title" RenderTransformOrigin="0.005,0.012" ToolTip="Date Taken" Foreground="White" Margin="0,10,9.8,0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="87" Height="32" VerticalAlignment="Top" FontStyle="Italic">
             <Label.Effect>
                 <DropShadowEffect ShadowDepth="4"/>
             </Label.Effect>
