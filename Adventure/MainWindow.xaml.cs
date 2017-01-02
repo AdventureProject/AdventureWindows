@@ -76,7 +76,21 @@ namespace Adventure
                         bitmapSource.Freeze();
                         imagePreview.Dispatcher.BeginInvoke(new Action(() => {
                             photoTitle.Content = photo.Title;
+
+                            if (string.IsNullOrEmpty(photo.Description.Trim()))
+                            {
+                                descriptionLabel.Visibility = Visibility.Hidden;
+                            }
+                            else
+                            {
+                                descriptionLabel.Visibility = Visibility.Visible;
+                            }
+                            descriptionLabel.Content = photo.Description;
+                            DateTime dateTime = DateTime.Parse(photo.Date);
+                            photoDateLabel.Content = dateTime.ToString("dd MMMM yyyy");
                             imagePreview.Source = bitmapSource;
+
+                            loadingView.Visibility = Visibility.Hidden;
                         }));
                     }
                 });
@@ -84,42 +98,32 @@ namespace Adventure
             bw.RunWorkerAsync();
         }
 
-        public void TodaysWallpaper_Click(object sender, RoutedEventArgs e)
+        public void Settings_Click(object sender, RoutedEventArgs e)
         {
-            app().FetchTodaysWallpaper();
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.Show();
         }
 
-        public void RandomWallpaper_Click(object sender, RoutedEventArgs e)
+        public void onLoadStart()
         {
-            app().FetchRandomWallpaper();
+            loadingView.Visibility = Visibility.Visible;
         }
 
-        public void Schedule_Click(object sender, RoutedEventArgs e)
+        public void MoreInfo_Click(object sender, RoutedEventArgs e)
         {
-            app().SetUpTimer();
-            MessageBox.Show("Schedule set");
-        }
+            string url = app().currentWallpaper.Url;
+            int end = url.IndexOf("/sizes/");
+            string mainFlickrUrl;
+            if (end > -1)
+            {
+                mainFlickrUrl = url.Substring(0, end);
+            }
+            else
+            {
+                mainFlickrUrl = url;
+            }
 
-        public void StartBoot_Click(object sender, RoutedEventArgs e)
-        {
-            App.StartOnBoot();
-            MessageBox.Show("Start on boot");
-        }
-
-        public void RemoveBoot_Click(object sender, RoutedEventArgs e)
-        {
-            App.RemoveOnBoot();
-            MessageBox.Show("Cancel on boot");
-        }
-
-        public void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        public void LatestVersion_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start(((Hyperlink)sender).NavigateUri.ToString());
+            Process.Start(mainFlickrUrl);
         }
 
         private App app()

@@ -47,7 +47,7 @@ namespace Adventure
 
         private void OpenCommandExecuted(object target, ExecutedRoutedEventArgs e)
         {
-            if(!IsWindowOpen<MainWindow>())
+            if (!IsWindowOpen<MainWindow>())
             {
                 MainWindow window = new MainWindow();
                 window.Show();
@@ -82,6 +82,8 @@ namespace Adventure
 
         public void FetchTodaysWallpaper()
         {
+            loadingStarted();
+
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += new DoWorkEventHandler(
                 delegate (object o, DoWorkEventArgs args)
@@ -95,6 +97,8 @@ namespace Adventure
 
         public void FetchRandomWallpaper()
         {
+            loadingStarted();
+
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += new DoWorkEventHandler(
                 delegate (object o, DoWorkEventArgs args)
@@ -122,6 +126,16 @@ namespace Adventure
                     }
                 }));
             }
+        }
+
+        public void loadingStarted()
+        {
+            Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(delegate {
+                if (MainWindow != null)
+                {
+                    ((MainWindow)MainWindow).onLoadStart();
+                }
+            }));
         }
 
         public void SetUpTimer()

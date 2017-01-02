@@ -3,32 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Adventure"
+        xmlns:local="Adventure"
         mc:Ignorable="d"
-        Title="Adventure.Rocks" Height="300" Width="500" Icon="Icons/Tray.ico">
-    <Grid Margin="0,0,12,11">
+        Title="Adventure.Rocks" Height="300" Width="551.301" Icon="Icons/Tray.ico" Background="SlateBlue">
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75*"/>
             <RowDefinition Height="19*"/>
         </Grid.RowDefinitions>
+        <Image x:Name="imagePreview" Margin="0,0,-8.2,-7.8" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Stretch="UniformToFill">
+            <Image.OpacityMask>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FF252526" Offset="1"/>
+                </LinearGradientBrush>
+            </Image.OpacityMask>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.762"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Label x:Name="photoTitle" Content="Title" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.005,0.012" Width="397" ToolTip="Photo Title" Foreground="White" FontSize="24" Height="97">
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="4"/>
+            </Label.Effect>
+        </Label>
+        <Button x:Name="Settings" Margin="0,0,9.8,10.4" Grid.Row="1" Content="Settings" Click="Settings_Click" HorizontalAlignment="Right" Width="75" Height="19" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="versionTextBlock" TextWrapping="Wrap" Text="V ?" VerticalAlignment="Bottom" RenderTransformOrigin="6.125,0.312" Height="16" Margin="10,0,0,7.4" Grid.Row="1" HorizontalAlignment="Left" Width="36"/>
+        <Label x:Name="descriptionLabel" Content="Label" HorizontalAlignment="Left" Margin="11,0,0,10" RenderTransformOrigin="0.256,0.006" Width="431" Foreground="White" Background="#33F4F4F5" Height="104" VerticalAlignment="Bottom"/>
+        <Label x:Name="photoDateLabel" Content="Title" RenderTransformOrigin="0.005,0.012" ToolTip="Photo Title" Foreground="White" Margin="0,10,9.8,0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="87" Height="32" VerticalAlignment="Top" FontStyle="Italic">
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="4"/>
+            </Label.Effect>
+        </Label>
 
-        <Rectangle Fill="#FFA6A6A6" HorizontalAlignment="Left" Height="58" Margin="5,5,0,0" Stroke="Black" VerticalAlignment="Top" Width="90"/>
-
-        <Button x:Name="button" Click="TodaysWallpaper_Click" Content="Today" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
-        <Image x:Name="imagePreview" HorizontalAlignment="Left" Height="165" Margin="115,42,0,0" VerticalAlignment="Top" Width="274"/>
-        <Button x:Name="exitButton" Click="Exit_Click" Content="Exit" HorizontalAlignment="Left" Margin="10,12.783,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
-        <Button x:Name="scheduleButton" Click="Schedule_Click" Content="Schedule" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="75"/>
-
-        <Rectangle Fill="#FFA6A6A6" HorizontalAlignment="Left" Height="58" Margin="5,93,0,0" Stroke="Black" VerticalAlignment="Top" Width="90" Grid.RowSpan="2"/>
-        <Button x:Name="startOnBootbutton" Click="StartBoot_Click" Content="Start on Boot" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="removeOnBootbutton" Click="RemoveBoot_Click" Content="Cancel Boot" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="randomButton" Click="RandomWallpaper_Click" Content="Random" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75"/>
-
-        <TextBlock Margin="0,25,10,-4" Grid.Row="1" HorizontalAlignment="Right" Width="104">
-            Get 
-            <Hyperlink NavigateUri="http://wethinkadventure.rocks/client/windows/latest" Click="LatestVersion_Click">Latest Version</Hyperlink>
-        </TextBlock>
-        <TextBlock x:Name="versionTextBlock" HorizontalAlignment="Left" Margin="115,25,0,-3" Grid.Row="1" TextWrapping="Wrap" Text="V ?" VerticalAlignment="Top" RenderTransformOrigin="6.125,0.312"/>
-        <Label x:Name="photoTitle" Content="Title" HorizontalAlignment="Left" Margin="115,11,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.005,0.012" Width="352"/>
+        <TextBlock Margin="10,0,0,28.4" Height="19" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Left" Width="65" Background="#33F4F4F5"><Hyperlink Click="MoreInfo_Click"><Run Text="More Info"/></Hyperlink></TextBlock>
+        <Label x:Name="loadingView" Content="Loading..." HorizontalAlignment ="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="48"  Background="SlateBlue" Margin="0,0,-0.2,0.4" Grid.RowSpan="2"/>
     </Grid>
+
 </Window>
