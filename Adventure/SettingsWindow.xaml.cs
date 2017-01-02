@@ -13,6 +13,8 @@ namespace Adventure
         public SettingsWindow()
         {
             InitializeComponent();
+
+            versionTextBlock.Text = "V " + AdventureUtils.VERSION;
         }
 
         public void Schedule_Click(object sender, RoutedEventArgs e)

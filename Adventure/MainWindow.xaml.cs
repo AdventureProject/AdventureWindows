@@ -29,8 +29,6 @@ namespace Adventure
             {
                 setImagePreviewAsync(currentWallpaper);
             }
-            
-            versionTextBlock.Text = "V " + AdventureUtils.VERSION;
         }
 
         private void WallpaperSet(object target, ExecutedRoutedEventArgs e)

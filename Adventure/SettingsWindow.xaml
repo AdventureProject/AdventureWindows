@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Adventure"
-        Title="Settings" Height="256" Width="150" Icon="Icons/Tray.ico" WindowStyle="ToolWindow">
+        Title="Settings" Height="287.099" Width="150" Icon="Icons/Tray.ico" WindowStyle="ToolWindow">
     <StackPanel Margin="0,0,0,0.0">
 
         <Button x:Name="button" Click="TodaysWallpaper_Click" Content="Today" Margin="10,10,36,0" Height="19"/>
@@ -13,6 +13,7 @@
         <Button x:Name="removeOnBootbutton" Click="RemoveBoot_Click" Content="Cancel Boot" Margin="10,10,36,0" VerticalAlignment="Top" Height="19"/>
         <Button x:Name="randomButton" Click="RandomWallpaper_Click" Content="Random" Margin="10,10,36,0" VerticalAlignment="Top" Height="19"/>
         <Button x:Name="exitButton" Click="Exit_Click" Content="Exit" Margin="10,10,36.6,0" VerticalAlignment="Top" Height="19"/>
+        <TextBlock x:Name="versionTextBlock" TextWrapping="Wrap" Text="V ?" VerticalAlignment="Bottom" RenderTransformOrigin="6.125,0.312" Height="16" Margin="10,10,36,0" Grid.Row="1" HorizontalAlignment="Left" Width="36"/>
         <TextBlock Margin="10,10,9.6,0" Height="19" VerticalAlignment="Bottom"><Run Text="Get "/><Hyperlink NavigateUri="http://wethinkadventure.rocks/client/windows/latest" Click="LatestVersion_Click"><Run Text="Latest Version"/></Hyperlink></TextBlock>
     </StackPanel>
 </Window>
