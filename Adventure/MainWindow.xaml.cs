@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -49,6 +50,9 @@ namespace Adventure
             bw.RunWorkerAsync();
         }
 
+        [DllImport("gdi32")]
+        static extern int DeleteObject(IntPtr o);
+
         public void setImagePreviewAsync(Photo photo)
         {
             BackgroundWorker bw = new BackgroundWorker();
@@ -57,38 +61,47 @@ namespace Adventure
                 {
                     if (photo != null)
                     {
-                        Uri uri = new Uri(photo.Image);
-                        Stream s = new System.Net.WebClient().OpenRead(uri.ToString());
-                        Image image = Image.FromStream(s);
-
-                        var oldBitmap =
-                            image as Bitmap ?? new Bitmap(image);
-
-                        var bitmapSource =
-                            System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                                oldBitmap.GetHbitmap(Color.Transparent),
-                                IntPtr.Zero,
-                                new Int32Rect(0, 0, oldBitmap.Width, oldBitmap.Height),
-                                null);
-
-                        bitmapSource.Freeze();
-                        imagePreview.Dispatcher.BeginInvoke(new Action(() => {
-                            photoTitle.Content = photo.Title;
-
-                            if (string.IsNullOrEmpty(photo.Description.Trim()))
+                        imagePreview.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            Image image = Image.FromFile(Wallpaper.GetWallpaperFile());
+                            if (image != null)
                             {
-                                descriptionLabel.Visibility = Visibility.Hidden;
-                            }
-                            else
-                            {
-                                descriptionLabel.Visibility = Visibility.Visible;
-                            }
-                            descriptionLabel.Content = photo.Description;
-                            DateTime dateTime = DateTime.Parse(photo.Date);
-                            photoDateLabel.Content = dateTime.ToString("dd MMMM yyyy");
-                            imagePreview.Source = bitmapSource;
+                                var oldBitmap = image as Bitmap ?? new Bitmap(image);
 
-                            loadingView.Visibility = Visibility.Hidden;
+                                IntPtr ip = oldBitmap.GetHbitmap(Color.Transparent);
+
+                                var bitmapSource =
+                                    System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                                        ip,
+                                        IntPtr.Zero,
+                                        new Int32Rect(0, 0, oldBitmap.Width, oldBitmap.Height),
+                                        null);
+
+                                DeleteObject(ip);
+                                oldBitmap.Dispose();
+                                image.Dispose();
+
+                                bitmapSource.Freeze();
+
+                                photoTitle.Text = photo.Title;
+
+                                if (string.IsNullOrEmpty(photo.Description.Trim()))
+                                {
+                                    descriptionLabel.Visibility = Visibility.Hidden;
+                                }
+                                else
+                                {
+                                    descriptionLabel.Visibility = Visibility.Visible;
+                                }
+                                descriptionLabel.Text = photo.Description;
+                                DateTime dateTime = DateTime.Parse(photo.Date);
+                                photoDateLabel.Text = dateTime.ToString("dd MMMM yyyy");
+                                imagePreview.Source = bitmapSource;
+
+                                GC.Collect();
+
+                                loadingView.Visibility = Visibility.Hidden;
+                            }
                         }));
                     }
                 });

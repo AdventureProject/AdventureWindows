@@ -15,6 +15,12 @@ namespace Adventure
 {
     public sealed class Wallpaper
     {
+        public static readonly string WALLPAPER_FILE = "wallpaper.bmp";
+        public static string GetWallpaperFile()
+        {
+            return Path.Combine(Path.GetTempPath(), WALLPAPER_FILE);
+        }
+
         Wallpaper() { }
 
         const int SPI_SETDESKWALLPAPER = 20;
@@ -51,68 +57,74 @@ namespace Adventure
 
         public static void Set(Uri uri, Style style)
         {
-            Stream s = new System.Net.WebClient().OpenRead(uri.ToString());
-            Image image = Image.FromStream(s);
-
-            Point maxSize = getMaxScreenSize();
-
-            double ratioX = (double)maxSize.X / (double)image.Width;
-
-            Image resizedImage = ResizeImage(image, (int)(image.Width * ratioX), (int)(image.Height * ratioX));
-
-            /*
-            // Figure out the ratio
-            double ratioX = (double)maxWidth / (double)image.Width;
-            double ratioY = (double)maxHeight / (double)image.Height;
-            // use whichever multiplier is smaller
-            double ratio = ratioX < ratioY ? ratioX : ratioY;
-
-            int newWidth = (int)((double)image.Width * ratio);
-            int newHeight = (int)((double)image.Height * ratio);
-            */
-
-            int heightDelta = resizedImage.Height - maxSize.Y;
-
-            Rectangle cropRect = new Rectangle( 0, 0, maxSize.X, resizedImage.Height-heightDelta);
-            Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
-            using (Graphics g = Graphics.FromImage(target))
+            using (Stream s = new System.Net.WebClient().OpenRead(uri.ToString()))
             {
-                g.DrawImage(    resizedImage,
-                                new Rectangle(0, 0, target.Width, target.Height),
-                                cropRect,
-                                GraphicsUnit.Pixel );
-            }
+                Image image = Image.FromStream(s);
 
-            string tempPath = Path.Combine(Path.GetTempPath(), "wallpaper.bmp");
-            if (!Directory.Exists(Path.GetTempPath()))
-            {
-                Directory.CreateDirectory(Path.GetTempPath());
-            }
-            target.Save(tempPath, ImageFormat.Bmp);
+                Point maxSize = getMaxScreenSize();
 
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
-            if (style == Style.Stretched)
-            {
-                key.SetValue(@"WallpaperStyle", 2.ToString());
-                key.SetValue(@"TileWallpaper", 0.ToString());
-            }
+                double ratioX = (double)maxSize.X / (double)image.Width;
 
-            if (style == Style.Centered)
-            {
-                key.SetValue(@"WallpaperStyle", 1.ToString());
-                key.SetValue(@"TileWallpaper", 0.ToString());
-            }
+                Image resizedImage = ResizeImage(image, (int)(image.Width * ratioX), (int)(image.Height * ratioX));
+                image.Dispose();
 
-            if (style == Style.Tiled)
-            {
-                key.SetValue(@"WallpaperStyle", 1.ToString());
-                key.SetValue(@"TileWallpaper", 1.ToString());
-            }
+                /*
+                // Figure out the ratio
+                double ratioX = (double)maxWidth / (double)image.Width;
+                double ratioY = (double)maxHeight / (double)image.Height;
+                // use whichever multiplier is smaller
+                double ratio = ratioX < ratioY ? ratioX : ratioY;
 
-            SystemParametersInfo(SPI_SETDESKWALLPAPER,
-                0,
-                tempPath,
-                SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
+                int newWidth = (int)((double)image.Width * ratio);
+                int newHeight = (int)((double)image.Height * ratio);
+                */
+
+                int heightDelta = resizedImage.Height - maxSize.Y;
+
+                Rectangle cropRect = new Rectangle(0, 0, maxSize.X, resizedImage.Height - heightDelta);
+                Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
+                using (Graphics g = Graphics.FromImage(target))
+                {
+                    g.DrawImage(resizedImage,
+                                    new Rectangle(0, 0, target.Width, target.Height),
+                                    cropRect,
+                                    GraphicsUnit.Pixel);
+                }
+
+                string tempPath = GetWallpaperFile();
+                if (!Directory.Exists(Path.GetTempPath()))
+                {
+                    Directory.CreateDirectory(Path.GetTempPath());
+                }
+                target.Save(tempPath, ImageFormat.Bmp);
+                target.Dispose();
+
+                resizedImage.Dispose();
+
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+                if (style == Style.Stretched)
+                {
+                    key.SetValue(@"WallpaperStyle", 2.ToString());
+                    key.SetValue(@"TileWallpaper", 0.ToString());
+                }
+
+                if (style == Style.Centered)
+                {
+                    key.SetValue(@"WallpaperStyle", 1.ToString());
+                    key.SetValue(@"TileWallpaper", 0.ToString());
+                }
+
+                if (style == Style.Tiled)
+                {
+                    key.SetValue(@"WallpaperStyle", 1.ToString());
+                    key.SetValue(@"TileWallpaper", 1.ToString());
+                }
+
+                SystemParametersInfo(SPI_SETDESKWALLPAPER,
+                    0,
+                    tempPath,
+                    SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
+            }
         }
 
         public static Bitmap ResizeImage(Image image, int width, int height)

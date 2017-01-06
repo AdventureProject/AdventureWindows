@@ -12,6 +12,8 @@ namespace Adventure
 {
     class AdventureUtils
     {
+        private static DateTime m_lastVersionCheck;
+
         public static Stream MakeRequest(string requestUrl)
         {
             Stream responseStream;
@@ -41,8 +43,7 @@ namespace Adventure
         {
             Photo photo = null;
 
-            Stream response = MakeRequest(url);
-            using (response)
+            using (Stream response = MakeRequest(url))
             {
                 if (response != null)
                 {
@@ -68,7 +69,7 @@ namespace Adventure
             return GetPhoto(URL_RANDOM_WALLPAPER);
         }
 
-        public static string VERSION = @"2";
+        public static string VERSION = @"3";
         public static async Task<Octokit.Release> getLatestVersion()
         {
             var github = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("AdventureWindows"));
@@ -78,11 +79,31 @@ namespace Adventure
 
         public static async void checkVersion()
         {
-            var latest = await getLatestVersion();
-
-            if (!latest.Name.Equals(VERSION, StringComparison.Ordinal))
+            if(m_lastVersionCheck == null || m_lastVersionCheck.AddHours(12).CompareTo( DateTime.Now ) < 0)
             {
-                MessageBox.Show("New version avalible:\nLatest: " + latest.Name + "\nCurrent: " + VERSION);
+                Console.Out.WriteLine("Checking GitHub for newer version");
+
+                try
+                {
+                    var latest = await getLatestVersion();
+
+                    if (!latest.Name.Equals(VERSION, StringComparison.Ordinal))
+                    {
+                        MessageBox.Show("New version avalible:\nLatest: " + latest.Name + "\nCurrent: " + VERSION);
+                    }
+                }
+                catch(Octokit.RateLimitExceededException e )
+                {
+                    Console.Out.WriteLine("Rate limited by GitHub, backing off...");
+                }
+                finally
+                {
+                    m_lastVersionCheck = DateTime.Now;
+                }
+            }
+            else
+            {
+                Console.Out.WriteLine("Not checking GitHub for newer version. Too soon.");
             }
         }
     }
