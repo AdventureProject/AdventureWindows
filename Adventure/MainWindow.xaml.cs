@@ -123,18 +123,8 @@ namespace Adventure
         public void MoreInfo_Click(object sender, RoutedEventArgs e)
         {
             string url = app().currentWallpaper.Url;
-            int end = url.IndexOf("/sizes/");
-            string mainFlickrUrl;
-            if (end > -1)
-            {
-                mainFlickrUrl = url.Substring(0, end);
-            }
-            else
-            {
-                mainFlickrUrl = url;
-            }
 
-            Process.Start(mainFlickrUrl);
+            Process.Start(url);
         }
 
         private App app()
