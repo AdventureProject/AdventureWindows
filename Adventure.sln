@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adventure", "Adventure\Adventure.csproj", "{E124F48D-8538-467C-B98D-8517E25A1A28}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{96C558E5-E85D-4518-8BAC-1C50F27F6D00}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupWizard", "SetupWizard\SetupWizard.vdproj", "{692B8B52-5E38-4A55-9759-637C6A08741A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,10 @@ Global
 		{E124F48D-8538-467C-B98D-8517E25A1A28}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E124F48D-8538-467C-B98D-8517E25A1A28}.Release|x64.ActiveCfg = Release|x64
 		{E124F48D-8538-467C-B98D-8517E25A1A28}.Release|x64.Build.0 = Release|x64
-		{96C558E5-E85D-4518-8BAC-1C50F27F6D00}.Debug|Any CPU.ActiveCfg = Debug
-		{96C558E5-E85D-4518-8BAC-1C50F27F6D00}.Debug|Any CPU.Build.0 = Debug
-		{96C558E5-E85D-4518-8BAC-1C50F27F6D00}.Debug|x64.ActiveCfg = Debug
-		{96C558E5-E85D-4518-8BAC-1C50F27F6D00}.Debug|x64.Build.0 = Debug
-		{96C558E5-E85D-4518-8BAC-1C50F27F6D00}.Release|Any CPU.ActiveCfg = Release
-		{96C558E5-E85D-4518-8BAC-1C50F27F6D00}.Release|Any CPU.Build.0 = Release
-		{96C558E5-E85D-4518-8BAC-1C50F27F6D00}.Release|x64.ActiveCfg = Release
-		{96C558E5-E85D-4518-8BAC-1C50F27F6D00}.Release|x64.Build.0 = Release
+		{692B8B52-5E38-4A55-9759-637C6A08741A}.Debug|Any CPU.ActiveCfg = Debug
+		{692B8B52-5E38-4A55-9759-637C6A08741A}.Debug|x64.ActiveCfg = Debug
+		{692B8B52-5E38-4A55-9759-637C6A08741A}.Release|Any CPU.ActiveCfg = Release
+		{692B8B52-5E38-4A55-9759-637C6A08741A}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
