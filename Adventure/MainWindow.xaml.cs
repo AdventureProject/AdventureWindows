@@ -90,7 +90,7 @@ namespace Adventure
 
                                 //zoomedInImage.Source = new BitmapImage(AdventureUtils.GetZoomedInMapUrl(photo.Location));
                                 //zoomedOutImage.Source = new BitmapImage(AdventureUtils.GetZoomedOutMapUrl(photo.Location));
-                                
+
                                 zoomedInImage.Source = zoomedInMapSource;
                                 zoomedOutImage.Source = zoomedOutMapSource;
 
@@ -105,7 +105,7 @@ namespace Adventure
             bw.RunWorkerAsync();
         }
 
-        private BitmapSource convertToBitmapSource( Image image )
+        private BitmapSource convertToBitmapSource(Image image)
         {
             var oldBitmap = image as Bitmap ?? new Bitmap(image);
 
@@ -129,8 +129,7 @@ namespace Adventure
 
         public void Settings_Click(object sender, RoutedEventArgs e)
         {
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.Show();
+            app().ToggleSettingsWindow();
         }
 
         public void onLoadStart()

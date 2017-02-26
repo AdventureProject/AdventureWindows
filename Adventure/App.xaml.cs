@@ -23,6 +23,7 @@ namespace Adventure
     /// </summary>
     public partial class App : Application
     {
+        private static Mutex s_mutex = null;
 
         private Timer timer;
         private TaskbarIcon tb;
@@ -40,6 +41,12 @@ namespace Adventure
             CommandBinding OpenCommandBinding = new CommandBinding(ApplicationCommands.Open, OpenCommandExecuted);
             CommandManager.RegisterClassCommandBinding(typeof(object), OpenCommandBinding);
 
+            CommandBinding HelpCommandBinding = new CommandBinding(ApplicationCommands.Help, HelpCommandExecuted);
+            CommandManager.RegisterClassCommandBinding(typeof(object), HelpCommandBinding);
+
+            CommandBinding CloseCommandBinding = new CommandBinding(ApplicationCommands.Close, CloseCommandExecuted);
+            CommandManager.RegisterClassCommandBinding(typeof(object), CloseCommandBinding);
+
             StartOnBoot();
             SetUpTimer();
 
@@ -51,10 +58,11 @@ namespace Adventure
             const string appName = "Adventure.Rocks";
             bool createdNew;
 
+            s_mutex = new Mutex(true, appName, out createdNew);
 
             if (!createdNew)
             {
-                MessageBox.Show("The application is already running :)\n\nLook for the icon in your System Tray.","Adventure.Rocks", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("The application is already running :)\n\nLook for the icon in your System Tray.", "Adventure.Rocks", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 //app is already running! Exiting the application  
                 Application.Current.Shutdown();
@@ -63,11 +71,43 @@ namespace Adventure
 
         private void OpenCommandExecuted(object target, ExecutedRoutedEventArgs e)
         {
+            ToggleMainWindow();
+        }
+
+        private void HelpCommandExecuted(object target, ExecutedRoutedEventArgs e)
+        {
+            ToggleSettingsWindow();
+        }
+
+        public void ToggleMainWindow()
+        {
             if (!IsWindowOpen<MainWindow>())
             {
                 MainWindow window = new MainWindow();
                 window.Show();
             }
+            else
+            {
+                GetOpenWindow<MainWindow>().Close();
+            }
+        }
+
+        public void ToggleSettingsWindow()
+        {
+            if (!IsWindowOpen<SettingsWindow>())
+            {
+                SettingsWindow window = new SettingsWindow();
+                window.Show();
+            }
+            else
+            {
+                GetOpenWindow<SettingsWindow>().Close();
+            }
+        }
+
+        private void CloseCommandExecuted(object target, ExecutedRoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         public static void StartOnBoot()
@@ -94,6 +134,11 @@ namespace Adventure
             return string.IsNullOrEmpty(name)
                ? Application.Current.Windows.OfType<T>().Any()
                : Application.Current.Windows.OfType<T>().Any(w => w.Name.Equals(name));
+        }
+
+        public static Window GetOpenWindow<T>() where T : Window
+        {
+            return Application.Current.Windows.OfType<T>().First(); ;
         }
 
         public void FetchTodaysWallpaper()

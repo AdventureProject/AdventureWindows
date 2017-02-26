@@ -9,16 +9,16 @@
                   IconSource="/Icons/Tray.ico"
                   ToolTipText="Adventure.Rocks"
                   Visibility="Visible"
-                  MenuActivation="LeftOrRightClick"
-                  LeftClickCommand="ApplicationCommands.Open">
-        <!-- Set a simple context menu  -->
-        <!--
+                  DoubleClickCommand="ApplicationCommands.Open">
+
         <tb:TaskbarIcon.ContextMenu>
-            <ContextMenu Background="LightCoral">
-                <MenuItem Header="Open" Command="ApplicationCommands.Open" IsEnabled="True" />
+            <ContextMenu>
+                <MenuItem Header="Photo Info" Command="ApplicationCommands.Open" InputGestureText=" " IsEnabled="True" />
+                <MenuItem Header="Settings" Command="ApplicationCommands.Help" InputGestureText=" " IsEnabled="True" />
+                <MenuItem Header="Shutdown" Command="ApplicationCommands.Close" InputGestureText=" " IsEnabled="True" />
             </ContextMenu>
         </tb:TaskbarIcon.ContextMenu>
-        -->
+
     </tb:TaskbarIcon>
 
 </ResourceDictionary>
