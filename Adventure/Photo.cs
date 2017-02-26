@@ -27,5 +27,8 @@ namespace Adventure
 
         [DataMember(Name = "location")]
         public string Location { get; set; }
+
+        [DataMember(Name = "id")]
+        public string Id { get; set; }
     }
 }

@@ -4,16 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Adventure"
-        Title="Settings" Height="287.099" Width="150" Icon="Icons/Tray.ico" WindowStyle="ToolWindow">
-    <StackPanel Margin="0,0,0,0.0">
+        Title="Settings" SizeToContent="WidthAndHeight" Height="Auto" Width="Auto" Icon="Icons/Tray.ico" WindowStyle="ToolWindow">
 
-        <Button x:Name="button" Click="TodaysWallpaper_Click" Content="Today" Margin="10,10,36,0" Height="19"/>
-        <Button x:Name="scheduleButton" Click="Schedule_Click" Content="Schedule" Margin="10,10,36,0" VerticalAlignment="Top" Height="19"/>
-        <Button x:Name="startOnBootbutton" Click="StartBoot_Click" Content="Start on Boot" Margin="10,10,36,0" VerticalAlignment="Top" Height="19"/>
-        <Button x:Name="removeOnBootbutton" Click="RemoveBoot_Click" Content="Cancel Boot" Margin="10,10,36,0" VerticalAlignment="Top" Height="19"/>
-        <Button x:Name="randomButton" Click="RandomWallpaper_Click" Content="Random" Margin="10,10,36,0" VerticalAlignment="Top" Height="19"/>
-        <Button x:Name="exitButton" Click="Exit_Click" Content="Exit" Margin="10,10,36.6,0" VerticalAlignment="Top" Height="19"/>
-        <TextBlock x:Name="versionTextBlock" TextWrapping="Wrap" Text="V ?" VerticalAlignment="Bottom" RenderTransformOrigin="6.125,0.312" Height="16" Margin="10,10,36,0" Grid.Row="1" HorizontalAlignment="Left" Width="36"/>
-        <TextBlock Margin="10,10,9.6,0" Height="19" VerticalAlignment="Bottom"><Run Text="Get "/><Hyperlink NavigateUri="http://wethinkadventure.rocks/client/windows/latest" Click="LatestVersion_Click"><Run Text="Latest Version"/></Hyperlink></TextBlock>
-    </StackPanel>
+    <Border Padding="10">
+        <StackPanel Margin="0,0,0,0.0" HorizontalAlignment="Center">
+
+            <TextBlock TextWrapping="Wrap"><Bold>Change the photo:</Bold></TextBlock>
+            <Button x:Name="button" Click="TodaysWallpaper_Click" Content="Today's Photo" Margin="0,10,0,0" ToolTip="Set your wallpaper to today's Photo Of The Day"/>
+            <Button x:Name="randomButton" Click="RandomWallpaper_Click" Content="Random Photo" Margin="0,10,0,0" ToolTip="Set your wallpaper to a random photo"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,20,0,0"><Bold>Application Options:</Bold></TextBlock>
+            <Button x:Name="scheduleButton" Click="Schedule_Click" Content="Schedule Daily" ToolTip="Change your wallpaper once a day. This is on by default and is required for it to work properly." Margin="0,10,0,0"/>
+            <Button x:Name="startOnBootbutton" Click="StartBoot_Click" Content="Start on Boot" ToolTip="Start the application when your computer boots. This is on by default and is required for it to work properly." Margin="0,10,0,0"/>
+            <Button x:Name="removeOnBootbutton" Click="RemoveBoot_Click" Content="Cancel Start on Boot" ToolTip="Stop the application from starting when your computer boots. WARNING: the application will NOT work properly!" Margin="0,10,0,0"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,20,0,0"><Italic>Close the whole application</Italic></TextBlock>
+            <Button x:Name="exitButton" Click="Exit_Click" Content="Exit Application" Margin="0,10,0,0" ToolTip="Exit the application and stop it from running"/>
+            <TextBlock x:Name="versionTextBlock" TextWrapping="Wrap" Text="V ?" Margin="0,20,0,0" Grid.Row="1" ToolTip="Version"/>
+            <TextBlock Margin="0,10,0,0" ToolTip="Download the latest version of the application"><Run Text="Get "/><Hyperlink NavigateUri="http://wethinkadventure.rocks/client/windows/latest" Click="LatestVersion_Click"><Run Text="Latest Version"/></Hyperlink></TextBlock>
+            <TextBlock Margin="0,10,0,0" ToolTip="Visit the Adventure.Rocks website!"><Run Text="Visit "/><Hyperlink NavigateUri="http://wethinkadventure.rocks/" Click="VisitAdventure_Click"><Run Text="Adventure.Rocks"/></Hyperlink></TextBlock>
+        </StackPanel>
+    </Border>
 </Window>

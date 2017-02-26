@@ -42,10 +42,10 @@ namespace Adventure
             Point size = new Point();
 
             int maxSize = 0;
-            foreach( var screen in Screen.AllScreens )
+            foreach (var screen in Screen.AllScreens)
             {
                 int curSize = screen.Bounds.Width * screen.Bounds.Height;
-                if (curSize> maxSize)
+                if (curSize > maxSize)
                 {
                     maxSize = curSize;
                     size = new Point(screen.Bounds.Width, screen.Bounds.Height);
@@ -57,10 +57,10 @@ namespace Adventure
 
         public static void Set(Uri uri, Style style)
         {
-            using (Stream s = new System.Net.WebClient().OpenRead(uri.ToString()))
-            {
-                Image image = Image.FromStream(s);
+            Image image = AdventureUtils.GetImage(uri);
 
+            if (image != null)
+            {
                 Point maxSize = getMaxScreenSize();
 
                 double ratioX = (double)maxSize.X / (double)image.Width;

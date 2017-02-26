@@ -2,11 +2,10 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Adventure
 {
@@ -22,7 +21,7 @@ namespace Adventure
             AdventureUtils.checkVersion();
 
             Photo currentWallpaper = app().currentWallpaper;
-            if(currentWallpaper == null)
+            if (currentWallpaper == null)
             {
                 setImagePreviewAsync(AdventureUtils.URL_TODAYS_WALLPAPER);
             }
@@ -63,25 +62,16 @@ namespace Adventure
                     {
                         imagePreview.Dispatcher.BeginInvoke(new Action(() =>
                         {
-                            Image image = Image.FromFile(Wallpaper.GetWallpaperFile());
-                            if (image != null)
+                            Image wallpaperImage = Image.FromFile(Wallpaper.GetWallpaperFile());
+                            if (wallpaperImage != null)
                             {
-                                var oldBitmap = image as Bitmap ?? new Bitmap(image);
+                                BitmapSource wallpaperSource = convertToBitmapSource(wallpaperImage);
 
-                                IntPtr ip = oldBitmap.GetHbitmap(Color.Transparent);
+                                Image zoomedInMapimage = AdventureUtils.GetZoomedInMapImage(photo.Location);
+                                Image zoomedOutMapimage = AdventureUtils.GetZoomedOutMapImage(photo.Location);
 
-                                var bitmapSource =
-                                    System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                                        ip,
-                                        IntPtr.Zero,
-                                        new Int32Rect(0, 0, oldBitmap.Width, oldBitmap.Height),
-                                        null);
-
-                                DeleteObject(ip);
-                                oldBitmap.Dispose();
-                                image.Dispose();
-
-                                bitmapSource.Freeze();
+                                BitmapSource zoomedInMapSource = convertToBitmapSource(zoomedInMapimage);
+                                BitmapSource zoomedOutMapSource = convertToBitmapSource(zoomedOutMapimage);
 
                                 photoTitle.Text = photo.Title;
 
@@ -96,7 +86,13 @@ namespace Adventure
                                 descriptionLabel.Text = photo.Description;
                                 DateTime dateTime = DateTime.Parse(photo.Date);
                                 photoDateLabel.Text = dateTime.ToString("dd MMMM yyyy");
-                                imagePreview.Source = bitmapSource;
+                                imagePreview.Source = wallpaperSource;
+
+                                //zoomedInImage.Source = new BitmapImage(AdventureUtils.GetZoomedInMapUrl(photo.Location));
+                                //zoomedOutImage.Source = new BitmapImage(AdventureUtils.GetZoomedOutMapUrl(photo.Location));
+                                
+                                zoomedInImage.Source = zoomedInMapSource;
+                                zoomedOutImage.Source = zoomedOutMapSource;
 
                                 GC.Collect();
 
@@ -107,6 +103,28 @@ namespace Adventure
                 });
 
             bw.RunWorkerAsync();
+        }
+
+        private BitmapSource convertToBitmapSource( Image image )
+        {
+            var oldBitmap = image as Bitmap ?? new Bitmap(image);
+
+            IntPtr ip = oldBitmap.GetHbitmap(Color.Transparent);
+
+            var bitmapSource =
+                System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                    ip,
+                    IntPtr.Zero,
+                    new Int32Rect(0, 0, oldBitmap.Width, oldBitmap.Height),
+                    null);
+
+            DeleteObject(ip);
+            oldBitmap.Dispose();
+            image.Dispose();
+
+            bitmapSource.Freeze();
+
+            return bitmapSource;
         }
 
         public void Settings_Click(object sender, RoutedEventArgs e)
@@ -131,5 +149,25 @@ namespace Adventure
         {
             return ((App)Application.Current);
         }
+
+        private void zoomedInImage_MouseEnter(object sender, MouseEventArgs e)
+        {
+            zoomedInImage.Opacity = 1.0;
+        }
+
+        private void zoomedInImage_MouseLeave(object sender, MouseEventArgs e)
+        {
+            zoomedInImage.Opacity = 0.5;
+        }
+
+        private void zoomedOutImage_MouseEnter(object sender, MouseEventArgs e)
+        {
+            zoomedOutImage.Opacity = 1.0;
+        }
+
+        private void zoomedOutImage_MouseLeave(object sender, MouseEventArgs e)
+        {
+            zoomedOutImage.Opacity = 0.5;
+        }
     }
-}   
+}

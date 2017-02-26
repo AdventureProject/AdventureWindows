@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="Adventure"
         mc:Ignorable="d"
-        Title="Adventure.Rocks" Height="448" Width="600" Icon="Icons/Tray.ico" Background="SlateBlue">
+        Title="Adventure.Rocks" Height="448" Width="600" MinHeight="448" MinWidth="600" Icon="Icons/Tray.ico" Background="SlateBlue">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -36,6 +36,8 @@
         <TextBlock Margin="10,0,0,10.4" VerticalAlignment="Bottom" Grid.Row="1" Padding="3" HorizontalAlignment="Left" Background="#BBBBBBBB">View <Hyperlink Click="MoreInfo_Click"><Run Text="More Info"/></Hyperlink></TextBlock>
         <Label x:Name="loadingView" Content="Loading..." HorizontalAlignment ="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="48"  Background="SlateBlue" Margin="0,0,-0.2,0.4" Grid.RowSpan="2" Visibility="Hidden"/>
         <Button x:Name="Settings" Margin="0,0,9.8,10.4" Grid.Row="1" Content="Settings" Padding="3" Click="Settings_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Image x:Name="zoomedInImage" Height="168" Width="140" Margin="0,31,10,0" Opacity="0.5" VerticalAlignment="Top" HorizontalAlignment="Right" MouseEnter="zoomedInImage_MouseEnter" MouseLeave="zoomedInImage_MouseLeave" ToolTip="Zoomed in map of where the photo was taken"/>
+        <Image x:Name="zoomedOutImage" Height="168" Width="140" Margin="0,31,155,0" Opacity="0.5" VerticalAlignment="Top"   HorizontalAlignment="Right" MouseEnter="zoomedOutImage_MouseEnter" MouseLeave="zoomedOutImage_MouseLeave" ToolTip="Zoomed out map of where the photo was taken"/>
     </Grid>
 
 </Window>

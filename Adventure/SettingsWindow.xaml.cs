@@ -45,6 +45,11 @@ namespace Adventure
             Process.Start(((Hyperlink)sender).NavigateUri.ToString());
         }
 
+        public void VisitAdventure_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(((Hyperlink)sender).NavigateUri.ToString());
+        }
+
         public void TodaysWallpaper_Click(object sender, RoutedEventArgs e)
         {
             app().FetchTodaysWallpaper();
