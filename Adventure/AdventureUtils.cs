@@ -194,7 +194,7 @@ namespace Adventure
 
                     if (!latest.Name.Equals(VERSION, StringComparison.Ordinal))
                     {
-                        MessageBox.Show("New version avalible:\nLatest: " + latest.Name + "\nCurrent: " + VERSION + "\nGo to Settings to download the latest version.");
+                        MessageBox.Show("New version avalible:\nLatest: " + latest.Name + "\nCurrent: " + VERSION + "\n\nGo to Settings to download the latest version.", "Adventure.Rocks", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 catch (Octokit.RateLimitExceededException e)

@@ -23,6 +23,7 @@ namespace Adventure
     /// </summary>
     public partial class App : Application
     {
+
         private Timer timer;
         private TaskbarIcon tb;
 
@@ -43,6 +44,21 @@ namespace Adventure
             SetUpTimer();
 
             FetchTodaysWallpaper();
+        }
+
+        void App_Startup(object sender, StartupEventArgs e)
+        {
+            const string appName = "Adventure.Rocks";
+            bool createdNew;
+
+
+            if (!createdNew)
+            {
+                MessageBox.Show("The application is already running :)\n\nLook for the icon in your System Tray.","Adventure.Rocks", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                //app is already running! Exiting the application  
+                Application.Current.Shutdown();
+            }
         }
 
         private void OpenCommandExecuted(object target, ExecutedRoutedEventArgs e)
@@ -119,7 +135,8 @@ namespace Adventure
                 Uri uri = new Uri(photo.Image);
                 Wallpaper.Set(uri, Wallpaper.Style.Centered);
 
-                Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(delegate {
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(delegate
+                {
                     if (MainWindow != null)
                     {
                         ((MainWindow)MainWindow).setImagePreviewAsync(currentWallpaper);
@@ -130,7 +147,8 @@ namespace Adventure
 
         public void loadingStarted()
         {
-            Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(delegate {
+            Application.Current.Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(delegate
+            {
                 if (MainWindow != null)
                 {
                     ((MainWindow)MainWindow).onLoadStart();
@@ -145,7 +163,7 @@ namespace Adventure
 
         public void SetUpTimer(TimeSpan alertTime)
         {
-            if(timer!=null)
+            if (timer != null)
             {
                 timer.Dispose();
                 timer = null;
@@ -158,7 +176,7 @@ namespace Adventure
                 TimeSpan timeLeftToday = TimeSpan.FromDays(1.0) - current.TimeOfDay;
                 timeToGo = timeLeftToday + alertTime;
             }
-            
+
             this.timer = new Timer(x =>
             {
                 FetchTodaysWallpaper();
