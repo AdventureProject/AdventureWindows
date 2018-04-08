@@ -174,7 +174,7 @@ namespace Adventure
             return GetPhoto(URL_RANDOM_WALLPAPER);
         }
 
-        public static string VERSION = @"5";
+        public static string VERSION = @"6";
         public static async Task<Octokit.Release> getLatestVersion()
         {
             var github = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("AdventureWindows"));
@@ -200,6 +200,10 @@ namespace Adventure
                 catch (Octokit.RateLimitExceededException e)
                 {
                     Console.Out.WriteLine("Rate limited by GitHub, backing off...");
+                }
+                catch(System.Net.Http.HttpRequestException e)
+                {
+                    Console.Out.WriteLine("Failed to connect to GitHub.");
                 }
                 finally
                 {
