@@ -174,7 +174,7 @@ namespace Adventure
             return GetPhoto(URL_RANDOM_WALLPAPER);
         }
 
-        public static string VERSION = @"6";
+        public static string VERSION = @"7";
         public static async Task<Octokit.Release> getLatestVersion()
         {
             var github = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("AdventureWindows"));

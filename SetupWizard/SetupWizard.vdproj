@@ -28,18 +28,24 @@
         "Entry"
         {
         "MsmKey" = "8:_0C1D11CD15824194A49355114FB05EA4"
-        "OwnerKey" = "8:_CEFF3CFF00AD1B0BF626B2E03DBC5E1D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0C1D11CD15824194A49355114FB05EA4"
         "OwnerKey" = "8:_17FEA03BE5486776CFC04F56458EAF8D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_0C1D11CD15824194A49355114FB05EA4"
+        "OwnerKey" = "8:_47095090A280A05BD89CE05123D43B3F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_17FEA03BE5486776CFC04F56458EAF8D"
+        "OwnerKey" = "8:_4A605403683540B79CBF2F76F6D923C7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_47095090A280A05BD89CE05123D43B3F"
         "OwnerKey" = "8:_4A605403683540B79CBF2F76F6D923C7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -57,7 +63,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CEFF3CFF00AD1B0BF626B2E03DBC5E1D"
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_4A605403683540B79CBF2F76F6D923C7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -82,13 +88,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CEFF3CFF00AD1B0BF626B2E03DBC5E1D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4A605403683540B79CBF2F76F6D923C7"
+        "OwnerKey" = "8:_47095090A280A05BD89CE05123D43B3F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -116,6 +116,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -140,6 +148,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -248,31 +264,11 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BFCA132810C041FD909F50A108AAF602"
-            {
-            "SourcePath" = "8:banner.jpg"
-            "TargetName" = "8:banner.jpg"
-            "Tag" = "8:"
-            "Folder" = "8:_2159FF768AE6465CACFF944E66AF6989"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CEFF3CFF00AD1B0BF626B2E03DBC5E1D"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_47095090A280A05BD89CE05123D43B3F"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Octokit, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Octokit, Version=0.29.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                 }
@@ -292,6 +288,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BFCA132810C041FD909F50A108AAF602"
+            {
+            "SourcePath" = "8:banner.jpg"
+            "TargetName" = "8:banner.jpg"
+            "Tag" = "8:"
+            "Folder" = "8:_2159FF768AE6465CACFF944E66AF6989"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -350,15 +366,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AdventureRocks"
-        "ProductCode" = "8:{02088DA8-7D38-4176-AFB2-126DE0CB1EBB}"
-        "PackageCode" = "8:{468C1FAF-F4C3-442A-B765-0D571A6EB9FA}"
+        "ProductCode" = "8:{5CA0D3A9-4711-431D-9A8F-AC1D5E41ED60}"
+        "PackageCode" = "8:{6DA231AA-1F6F-4BCF-A42C-BBEF3A42D0FD}"
         "UpgradeCode" = "8:{5B8DBA9D-7F51-472A-858D-B49CFC4FDF18}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:DarkRockStudios"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -867,7 +883,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4A605403683540B79CBF2F76F6D923C7"
             {
-            "SourcePath" = "8:..\\Adventure\\obj\\x64\\Release\\Adventure.exe"
+            "SourcePath" = "8:..\\Adventure\\obj\\x64\\Debug\\Adventure.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2159FF768AE6465CACFF944E66AF6989"

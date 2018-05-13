@@ -20,6 +20,12 @@ namespace Adventure
 
             AdventureUtils.checkVersion();
 
+            // Clear out the design time values
+            photoTitle.Text = "";
+            descriptionLabel.Text = "";
+            photoDateLabel.Text = "";
+
+
             Photo currentWallpaper = app().currentWallpaper;
             if (currentWallpaper == null)
             {
